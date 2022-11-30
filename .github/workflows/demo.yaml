@@ -1,16 +1,21 @@
 name: basic demo
 
-on: [push]
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
 
 jobs:
   # u can have one jobs with many steps or multiple jobs with steps each
-  demo:
+  demo: #jobs run asynchronously
     runs-on: macos-12
-    steps:
+    steps: #steps run asynchronously
       - name: a basic echo
         run: echo Hello!
   demo2:
     runs-on: ubuntu-latest
+    needs: [first]
     steps:
       - name: a demo2 echo
         run: echo Hello from demo2!
